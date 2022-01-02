@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Colores y bordados</title>
+  
+  <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+	<script src="scripts/p5.js"></script>
+	<script src="K-Means clustering.js"></script>
+	<script src="Palette.js"></script>
+	<script src="sketch.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('[data-bs-toggle="popover"]').popover();  
+		});
+	</script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <div class="row">
+	<div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      <h1>Paleta de Colores</h1>	  
+	  <p>Escoge una imagen para generar una paleta de colores inspirada en ella. Se mostrarán los colores en formatos DCM y Anchor(estándares de colores de hilos para bordar), y en RGB.</p>  		  
+    </div>
+    <div class="col-sm-1"></div>	  
+  </div>
+</div>
+  
+<div class="container">
+  
+  <div id="seleccion" class="row">
+   
+  </div>
+  <div class="row">	  	
+   <hr style="margin-top: 1em"></hr> 
+		<div id="imagen">  			
+		</div>
+		<div class="col-sm-2">  
+			
+		</div>
+  </div>  
+  <div class="row">		
+	<hr style="margin-top: 1em"></hr>  
+  		<div class="col-sm-3">
+		
+			<button type="button" class="btn btn-lg w-100" id="color0"></button>
+			<p id="nombre0" class="fst-italic"> </p>	
+						
+			<p id="dmc0" class="lh-0"></p>
+					
+			<p id="anchor0" class="lh-1"></p>
+				
+			<p id="rgb0"></p>
+						
+		</div>
+		<div class="col-sm-3">
+			<button type="button" class="btn btn-lg w-100" id="color1"></button>	
+			<p id="nombre1" class="fst-italic"> </p>
+						
+			<p id="dmc1" class="lh-1"></p>
+			
+			<p id="anchor1" class="lh-1"></p>
+						
+			<p id="rgb1"></p>
+						
+		</div>
+		<div class="col-sm-3">
+			<button type="button" class="btn btn-lg w-100" id="color2"></button>
+			<p id="nombre2" class="fst-italic"> </p>
+			
+			<p id="dmc2" class="lh-1"></p>
+			
+			<p id="anchor2" class="lh-1"></p>
+			
+			<p id="rgb2"></p>
+						
+		</div>
+		<div class="col-sm-3">
+			<button type="button" class="btn btn-lg w-100" id="color3"></button>
+			<p id="nombre3" class="fst-italic"> </p>
+			
+			<p id="dmc3" class="lh-1"></p>
+						
+			<p id="anchor3" class="lh-1"></p>
+						
+			<p id="rgb3"></p>
+						
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+			<button type="button" class="btn btn-lg w-100" id="color4"></button>
+			<p id="nombre4" class="fst-italic"> </p>
+			
+			<p id="dmc4" class="lh-1"></p>
+			
+			<p id="anchor4" class="lh-1"></p>
+			
+			<p id="rgb4"></p>
+						
+		</div>
+		<div class="col-sm-3">			
+			<button type="button" class="btn btn-lg w-100" id="color5"></button> 
+			<p id="nombre5" class="fst-italic"> </p>
+			
+			<p id="dmc5" class="lh-1"></p>
+			
+			<p id="anchor5" class="lh-1"></p>
+			
+			<p id="rgb5"></p>	
+						
+		</div>  
+		<div class="col-sm-3">			
+			<button type="button" class="btn btn-lg w-100" id="color6"></button> 
+			<p id="nombre6" class="fst-italic"></p>
+			
+			<p id="dmc6" class="lh-1"></p>
+			
+			<p id="anchor6" class="lh-1"></p>
+			
+			<p id="rgb6"></p>	
+						
+		</div>  
+		<div class="col-sm-3">			
+			<button type="button" class="btn btn-lg w-100" id="color7"></button> 
+			<p id="nombre7" class="fst-italic"> </p>
+			
+			<p id="dmc7" class="lh-1"></p>
+			
+			<p id="anchor7" class="lh-1"></p>
+			
+			<p id="rgb7"></p>	
+						
+		</div>  
+  </div>
+	<div class="row justify-content-end">
+	<hr style="margin-buttom: 15em"></hr>
+	<div class="col align-self-end">		
+	  <button type="button" class="btn btn-dark float-end" data-bs-toggle="popover" title="Créditos" data-bs-content="Desarrollado por Laura Cortés-Rico y Elizabeth Garzón-Morales. Inspirado en: 210516 de Sayama  https://openprocessing.org/sketch/1195392 - 2021"> Créditos</button>	  
+	</div>
+	</div>
+</div>
+	
+<!-- Modal -->
+<div class="modal fade" id="masColores" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
